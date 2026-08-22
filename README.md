@@ -28,7 +28,6 @@ python3 main.py
 ### Expected Output
 - The script will print the evaluation steps and the total number of flagged transactions.
 - A new file named `flagged_transactions.jsonl` will be created in the directory.
-- Execution time should be well under 10 minutes, as required.
 
 ## Challenge Deliverables
 
