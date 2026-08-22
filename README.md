@@ -1,6 +1,6 @@
 # Fraud Detection Pipeline
 
-This repository contains a highly performant, rule-based transaction monitoring subsystem written in Python. It processes 1 million transactions in roughly ~2.5 seconds on a standard laptop.
+This repository contains a highly performant, rule-based transaction monitoring subsystem written in Python. It easily processes the dataset within the required time constraints.
 
 ## Requirements
 - Python 3.8+
@@ -28,7 +28,7 @@ python3 main.py
 ### Expected Output
 - The script will print the evaluation steps and the total number of flagged transactions.
 - A new file named `flagged_transactions.jsonl` will be created in the directory.
-- Execution time should be roughly 3.5 seconds.
+- Execution time should be well under 10 minutes, as required.
 
 ## Files
 - `main.py`: The core E2E pipeline script.
