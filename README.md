@@ -30,9 +30,16 @@ python3 main.py
 - A new file named `flagged_transactions.jsonl` will be created in the directory.
 - Execution time should be well under 10 minutes, as required.
 
-## Files
-- `main.py`: The core E2E pipeline script.
-- `Rules_and_Pipeline.md`: The required documentation explaining the 5 proposed rules, the 3 implemented rules, and the reasoning behind prioritizing them.
-- `flagged_transactions.jsonl`: The output file containing the flagged transactions and their human-readable reasons.
-- `experimentation.ipynb`: A Jupyter Notebook used during the EDA phase to rapidly test hypothesis and tune rule thresholds against the budget without paying the data-loading cost every time.
-- `eda_results.md`: A summary of the initial exploratory data analysis findings.
+## Challenge Deliverables
+
+The prompt requested 4 specific deliverables. They are mapped to the following files in this repository:
+
+1. **Code + README with run instructions:** 
+   - `main.py` (The highly-modular core pipeline script)
+   - `README.md` (This file, containing setup and run instructions)
+2. **Rules Doc:** 
+   - `Rules_and_Pipeline.md` (Contains our EDA findings, the 3 implemented rules with rationales, and the 2 deferred rules with our prioritization reasoning).
+3. **Flagged-Output File:** 
+   - `flagged_transactions.jsonl` (Contains all 992 flagged transactions formatted exactly as requested).
+4. **Note on `confirmed_fraud.csv`:** 
+   - `Confirmed_Fraud_Analysis.md` (A dedicated document explaining how we used the labeled dataset for EDA, our 78.9% recall performance against it, and why the dataset's inherent dispute bias prevents it from measuring false-positive rates).
