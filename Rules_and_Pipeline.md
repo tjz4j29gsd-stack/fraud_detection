@@ -2,7 +2,17 @@
 
 This document outlines our data-driven approach to designing the fraud monitoring pipeline. It details our key analytical findings, the 3 rules we prioritized for implementation, and the 2 rules we deferred to respect the operational review budget.
 
-## 1. Key Exploratory Data Analysis (EDA) Findings
+## 2. Data Preprocessing & Quality Handling
+
+As noted in the prompt, real-world data contains malformations. Our pipeline explicitly handles data quality in the `load_and_clean_data` function before evaluating any rules:
+* **Malformed Timestamps:** Timestamps are coerced to standard datetime objects. Any rows with completely invalid or un-parseable timestamps are dropped, as our behavioral time-window rules rely entirely on chronologically sorted data.
+* **Merchant Normalization:** Merchant names are extremely inconsistent in the raw dataset. We strip leading/trailing whitespace and convert all merchant names to lowercase to ensure our exact-string matching (used in Rule 2) evaluates correctly.
+* **Invalid Amounts:** Per the schema spec, `amount` indicates a positive debit. We explicitly filter out any rows with negative amounts (which could represent refunds or data corruption) to prevent them from skewing the threshold math.
+* **Chronological Sorting:** The dataset is not guaranteed to be sorted. The entire dataframe is explicitly sorted by `timestamp` after cleaning, which is a hard prerequisite for our Pandas `diff()` rolling-window calculations to function accurately.
+
+---
+
+## 3. Key Exploratory Data Analysis (EDA) Findings
 
 Before writing any rules, we ran a thorough statistical analysis on the 1M transactions against the confirmed fraud labels. Three critical patterns emerged that directly informed our pipeline:
 
@@ -12,7 +22,7 @@ Before writing any rules, we ran a thorough statistical analysis on the 1M trans
 
 ---
 
-## 2. The 3 Implemented Rules
+## 4. The 3 Implemented Rules
 
 We implemented the following 3 rules in our pipeline (`main.py`). The thresholds were strictly tuned to ensure we respect the analyst review budget of **~1,000 flags per 1M transactions**. Our final pipeline flags exactly 992 transactions.
 
@@ -40,7 +50,7 @@ By implementing this hybrid approach, we achieved exactly **992 total flags** on
 
 ---
 
-## 3. The 2 Deferred Rules
+## 5. The 2 Deferred Rules
 
 Per the challenge requirements, here are 2 additional proposed rules. These represent highly promising, industry-standard fraud signals. However, due to time constraints, we did not have the opportunity to fully test and fine-tune their thresholds to fit within the strict 1,000 flag operational budget. We instead prioritized the deployment of Rules 1-3 because they immediately yielded a proven ~80% recall.
 
