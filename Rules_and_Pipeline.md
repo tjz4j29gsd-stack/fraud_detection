@@ -12,7 +12,7 @@ Therefore, we **cannot** assume an unflagged transaction is legitimate. We used 
 
 ## 2. The 3 Implemented Rules
 
-We implemented the following 3 rules in our pipeline (`main.py`). The thresholds were strictly tuned to ensure we respect the analyst review budget of **~1,000 flags per 1M transactions**. Our final pipeline flags exactly 1,011 transactions.
+We implemented the following 3 rules in our pipeline (`main.py`). The thresholds were strictly tuned to ensure we respect the analyst review budget of **~1,000 flags per 1M transactions**. Our final pipeline flags exactly 992 transactions.
 
 ### **Rule 1: Card Testing Velocity**
 * **Logic:** Flag if a user makes > 3 transactions under $5 within a rolling 15-minute window.
