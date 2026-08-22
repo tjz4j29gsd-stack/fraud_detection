@@ -14,8 +14,10 @@ pip install pandas
 ## Running the Pipeline
 
 **1. Data Setup:**
-Because the dataset is highly confidential and extremely large (1M rows), `transactions.csv` is explicitly excluded from version control via `.gitignore`. 
-Before running the pipeline, you **must** download `transactions.csv` and place it in the root directory of this repository.
+Because the dataset is highly confidential and extremely large, both data files were explicitly excluded from version control via `.gitignore`. 
+Before running the pipeline, you **must** download `transactions.csv` and place it in the root directory of this repository. 
+- [Download transactions.csv](https://drive.google.com/file/d/1aRY6Yf0vQFqoSEg77npv92iJsl16snYP/view?usp=sharing)
+- [Download confirmed_fraud.csv](https://drive.google.com/file/d/1MS6ZKhhx6v8BYQYWGysBsULiI-nsJLzo/view?usp=sharing) *(Note: `main.py` does not require this file to run the rule evaluation, but it is necessary if you wish to manually verify the ~80% recall metrics cited in `Rules_and_Pipeline.md`)*.
 
 **2. Execution:**
 Run the main pipeline script:
